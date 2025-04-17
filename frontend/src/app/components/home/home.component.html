@@ -1,0 +1,118 @@
+<div class="home-container">
+  <!-- Hero Section -->
+  <section class="hero" @fadeIn>
+    <div class="hero-content">
+      <h1 class="glow-text">Welcome to TECHFEST 2025</h1>
+      <p class="hero-subtitle glow-text">Where Innovation Meets Excellence</p>
+      <div class="cta-buttons">
+        <button routerLink="/register" class="cta-button primary">
+          <i class="fas fa-rocket"></i> Register Now
+        </button>
+        <button routerLink="/events" class="cta-button secondary">
+          <i class="fas fa-calendar-alt"></i> View Events
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Events Section -->
+  <section class="events-section" @fadeIn>
+    <h2>Upcoming Events</h2>
+    <div class="events-grid">
+      <div class="event-card" *ngFor="let event of events; trackBy: trackByIndex" @fadeIn>
+        <div class="event-image">
+          <img [src]="event.image" [alt]="event.title" loading="lazy">
+          <div class="event-date">
+            <i class="far fa-calendar"></i>
+            {{event.date | date:'mediumDate'}}
+          </div>
+        </div>
+        <div class="event-content">
+          <h3>{{event.title}}</h3>
+          <p class="event-location">
+            <i class="fas fa-map-marker-alt"></i> {{event.location}}
+          </p>
+          <p class="event-description">{{event.description}}</p>
+          <button class="learn-more">
+            Learn More <i class="fas fa-arrow-right"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Recent Winners Section -->
+  <section class="winners-section" @fadeIn>
+    <h2>Recent Winners</h2>
+    <div class="winners-grid">
+      <div class="winner-card" *ngFor="let winner of recentWinners; trackBy: trackByIndex" @fadeIn>
+        <div class="winner-image">
+          <img [src]="winner.image" [alt]="winner.name" loading="lazy">
+          <div class="achievement-badge">
+            <i class="fas fa-trophy"></i> {{winner.achievement}}
+          </div>
+        </div>
+        <div class="winner-content">
+          <h3>{{winner.name}}</h3>
+          <p class="winner-event">{{winner.event}}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Judges Section -->
+  <section class="judges-section" @fadeIn>
+    <h2>Meet Our Judges</h2>
+    <div class="judges-grid">
+      <div class="judge-card" *ngFor="let judge of judges; trackBy: trackByIndex" @fadeIn>
+        <div class="judge-image">
+          <img [src]="judge.image" [alt]="judge.name" loading="lazy">
+        </div>
+        <div class="judge-info">
+          <h3>{{judge.name}}</h3>
+          <p class="judge-role">{{judge.role}}</p>
+          <p class="judge-company">{{judge.company}}</p>
+          <div class="social-links">
+            <a href="#" class="social-link">
+              <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="#" class="social-link">
+              <i class="fab fa-twitter"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section class="testimonials-section" @fadeIn>
+    <h2>What Participants Say</h2>
+    <div class="testimonials-grid">
+      <div class="testimonial-card" *ngFor="let testimonial of displayedTestimonials; trackBy: trackByIndex" @fadeIn>
+        <div class="quote-icon">
+          <i class="fas fa-quote-left"></i>
+        </div>
+        <p class="testimonial-quote">{{testimonial.quote}}</p>
+        <div class="testimonial-author">
+          <p class="author-name">{{testimonial.author}}</p>
+          <p class="author-role">{{testimonial.role}}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter Section -->
+  <section class="newsletter-section" @fadeIn>
+    <div class="newsletter-content">
+      <h2>Stay Updated</h2>
+      <p>Subscribe to our newsletter for the latest updates and announcements</p>
+      <form class="newsletter-form">
+        <input type="email" placeholder="Enter your email" class="newsletter-input">
+        <button type="submit" class="newsletter-button">
+          <i class="fas fa-paper-plane"></i> Subscribe
+        </button>
+      </form>
+    </div>
+  </section>
+</div> 

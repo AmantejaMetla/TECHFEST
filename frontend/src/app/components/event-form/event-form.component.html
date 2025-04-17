@@ -1,0 +1,84 @@
+<div class="event-form-container">
+  <h2>{{ isEditing ? 'Edit Event' : 'Create New Event' }}</h2>
+  
+  <form [formGroup]="eventForm" (ngSubmit)="onSubmit()" class="event-form">
+    <div class="form-group">
+      <label for="name">Event Name</label>
+      <input
+        type="text"
+        id="name"
+        formControlName="name"
+        class="form-control"
+        [class.is-invalid]="eventForm.get('name')?.invalid && eventForm.get('name')?.touched"
+      >
+      <div class="invalid-feedback" *ngIf="eventForm.get('name')?.invalid && eventForm.get('name')?.touched">
+        Event name is required and must be at least 3 characters long
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="date">Event Date</label>
+      <input
+        type="datetime-local"
+        id="date"
+        formControlName="date"
+        class="form-control"
+        [class.is-invalid]="eventForm.get('date')?.invalid && eventForm.get('date')?.touched"
+      >
+      <div class="invalid-feedback" *ngIf="eventForm.get('date')?.invalid && eventForm.get('date')?.touched">
+        Event date is required
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="location">Location</label>
+      <input
+        type="text"
+        id="location"
+        formControlName="location"
+        class="form-control"
+        [class.is-invalid]="eventForm.get('location')?.invalid && eventForm.get('location')?.touched"
+      >
+      <div class="invalid-feedback" *ngIf="eventForm.get('location')?.invalid && eventForm.get('location')?.touched">
+        Location is required
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea
+        id="description"
+        formControlName="description"
+        class="form-control"
+        rows="4"
+        [class.is-invalid]="eventForm.get('description')?.invalid && eventForm.get('description')?.touched"
+      ></textarea>
+      <div class="invalid-feedback" *ngIf="eventForm.get('description')?.invalid && eventForm.get('description')?.touched">
+        Description is required
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="image_url">Image URL</label>
+      <input
+        type="url"
+        id="image_url"
+        formControlName="image_url"
+        class="form-control"
+        [class.is-invalid]="eventForm.get('image_url')?.invalid && eventForm.get('image_url')?.touched"
+      >
+      <div class="invalid-feedback" *ngIf="eventForm.get('image_url')?.invalid && eventForm.get('image_url')?.touched">
+        Please enter a valid image URL
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary" [disabled]="eventForm.invalid">
+        {{ isEditing ? 'Update Event' : 'Create Event' }}
+      </button>
+      <button type="button" class="btn btn-secondary" (click)="resetForm()">
+        Cancel
+      </button>
+    </div>
+  </form>
+</div> 

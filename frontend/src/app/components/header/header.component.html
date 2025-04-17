@@ -1,0 +1,28 @@
+<header>
+  <nav class="navbar">
+    <div class="nav-brand">
+      <a routerLink="/">TECHFEST</a>
+    </div>
+    
+    <div class="nav-links">
+      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
+      <a routerLink="/contact" routerLinkActive="active">Contact</a>
+    </div>
+    
+    <div class="nav-auth">
+      <a routerLink="/login" class="btn-login">Login</a>
+      <a routerLink="/register" class="btn-register">Register</a>
+      <button class="menu-toggle" (click)="toggleMenu()">
+        <span class="hamburger"></span>
+      </button>
+    </div>
+  </nav>
+</header>
+
+<!-- Mobile menu -->
+<div class="mobile-menu" [class.active]="isMenuOpen">
+  <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
+  <a routerLink="/contact" routerLinkActive="active">Contact</a>
+  <a routerLink="/login">Login</a>
+  <a routerLink="/register">Register</a>
+</div> 

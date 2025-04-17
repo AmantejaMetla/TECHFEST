@@ -1,0 +1,30 @@
+<div class="twitter-feed">
+  <h2 class="section-title">What Participants Say</h2>
+  
+  <div class="loading-spinner" *ngIf="loading">
+    <div class="spinner"></div>
+    <p>Loading tweets...</p>
+  </div>
+
+  <div class="error-message" *ngIf="error">
+    {{ error }}
+  </div>
+
+  <div class="tweets-container" *ngIf="!loading && !error">
+    <div class="tweet" *ngFor="let tweet of tweets">
+      <div class="tweet-header">
+        <img [src]="tweet.profileImage" [alt]="tweet.author" class="profile-image">
+        <div class="author-info">
+          <span class="author-name">{{ tweet.author }}</span>
+          <span class="tweet-date">{{ tweet.createdAt | date:'mediumDate' }}</span>
+        </div>
+      </div>
+      <div class="tweet-content">
+        {{ tweet.text }}
+      </div>
+      <div class="tweet-footer">
+        <span class="hashtag">#techfest2025</span>
+      </div>
+    </div>
+  </div>
+</div> 

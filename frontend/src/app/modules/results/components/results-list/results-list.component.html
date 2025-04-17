@@ -1,0 +1,56 @@
+<div class="results-container">
+  <div class="results-header">
+    <h1>Competition Results</h1>
+    <button *ngIf="isJudge" routerLink="/judge-dashboard/add-result" class="btn btn-primary">
+      Add New Result
+    </button>
+  </div>
+
+  <div *ngIf="loading" class="loading-spinner">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+
+  <div *ngIf="error" class="alert alert-danger">
+    {{ error }}
+  </div>
+
+  <div *ngIf="!loading && !error" class="results-grid">
+    <div *ngFor="let result of results" class="result-card">
+      <div class="result-header">
+        <h3>{{ result.event }}</h3>
+        <span class="badge" [ngClass]="{'badge-success': result.status === 'final',
+                                      'badge-warning': result.status === 'evaluated',
+                                      'badge-info': result.status === 'pending'}">
+          {{ result.status }}
+        </span>
+      </div>
+
+      <div class="result-body">
+        <div class="participant-info">
+          <strong>Participant:</strong> {{ result.participant.username }}
+        </div>
+        <div class="score-info">
+          <strong>Total Score:</strong> {{ result.totalScore | number:'1.0-1' }}/10
+        </div>
+        <div class="round-info">
+          <strong>Round:</strong> {{ result.round }}
+        </div>
+      </div>
+
+      <div class="result-footer">
+        <button [routerLink]="['/results', result._id]" class="btn btn-info">
+          View Details
+        </button>
+        <button *ngIf="isJudge" (click)="deleteResult(result._id)" class="btn btn-danger">
+          Delete
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="!loading && !error && results.length === 0" class="no-results">
+    <p>No results found.</p>
+  </div>
+</div> 

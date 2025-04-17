@@ -1,0 +1,104 @@
+<div class="result-detail-container">
+  <div *ngIf="loading" class="loading-spinner">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+
+  <div *ngIf="error" class="alert alert-danger">
+    {{ error }}
+  </div>
+
+  <div *ngIf="result" class="result-content">
+    <div class="result-header">
+      <h1>{{ result.event }}</h1>
+      <span class="badge" [ngClass]="{'badge-success': result.status === 'final',
+                                    'badge-warning': result.status === 'evaluated',
+                                    'badge-info': result.status === 'pending'}">
+        {{ result.status }}
+      </span>
+    </div>
+
+    <div class="result-info">
+      <div class="info-section">
+        <h2>Participant Information</h2>
+        <div class="info-grid">
+          <div class="info-item">
+            <label>Name:</label>
+            <span>{{ result.participant.username }}</span>
+          </div>
+          <div class="info-item">
+            <label>Round:</label>
+            <span>{{ result.round }}</span>
+          </div>
+          <div class="info-item">
+            <label>Total Score:</label>
+            <span>{{ result.totalScore | number:'1.0-1' }}/10</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="scores-section">
+        <h2>Detailed Scores</h2>
+        <div class="scores-grid">
+          <div class="score-card">
+            <h3>Technical</h3>
+            <div class="score">{{ calculateAverageScore('technical') | number:'1.0-1' }}/10</div>
+          </div>
+          <div class="score-card">
+            <h3>Innovation</h3>
+            <div class="score">{{ calculateAverageScore('innovation') | number:'1.0-1' }}/10</div>
+          </div>
+          <div class="score-card">
+            <h3>Presentation</h3>
+            <div class="score">{{ calculateAverageScore('presentation') | number:'1.0-1' }}/10</div>
+          </div>
+          <div class="score-card">
+            <h3>Implementation</h3>
+            <div class="score">{{ calculateAverageScore('implementation') | number:'1.0-1' }}/10</div>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="isJudge" class="judges-section">
+        <h2>Judges' Feedback</h2>
+        <div class="feedback-list">
+          <div *ngFor="let score of result.scores" class="feedback-card">
+            <div class="judge-info">
+              <strong>{{ score.judge.username }}</strong>
+              <span class="timestamp">{{ score.timestamp | date:'medium' }}</span>
+            </div>
+            <div class="feedback-text">
+              {{ score.feedback || 'No feedback provided.' }}
+            </div>
+            <div class="detailed-scores">
+              <div class="score-item">
+                <label>Technical:</label>
+                <span>{{ score.criteria.technical }}/10</span>
+              </div>
+              <div class="score-item">
+                <label>Innovation:</label>
+                <span>{{ score.criteria.innovation }}/10</span>
+              </div>
+              <div class="score-item">
+                <label>Presentation:</label>
+                <span>{{ score.criteria.presentation }}/10</span>
+              </div>
+              <div class="score-item">
+                <label>Implementation:</label>
+                <span>{{ score.criteria.implementation }}/10</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button routerLink="/results" class="btn btn-secondary">Back to Results</button>
+      <button *ngIf="isJudge" [routerLink]="['/judge-dashboard/edit-result', result._id]" class="btn btn-primary">
+        Edit Result
+      </button>
+    </div>
+  </div>
+</div> 

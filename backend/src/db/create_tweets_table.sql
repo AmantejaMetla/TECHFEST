@@ -1,0 +1,10 @@
+CREATE TABLE IF NOT EXISTS tweets (
+    id SERIAL PRIMARY KEY,
+    tweet_id VARCHAR(255) UNIQUE NOT NULL,
+    content TEXT NOT NULL,
+    author_name VARCHAR(255) NOT NULL,
+    author_handle VARCHAR(255) NOT NULL,
+    author_image_url TEXT,
+    created_at TIMESTAMP WITH TIME ZONE NOT NULL,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+); 
